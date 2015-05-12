@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Chat"
+    android:id="@+id/fullscreen_content">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+
+    <ListView android:id="@+id/message_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:keepScreenOn="true"
+        android:textColor="#33b5e5"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        android:gravity="center"
+        tools:listitem="@layout/user0_message"
+        android:stackFromBottom="true"
+        android:layout_weight="1.0"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent" />
+
+    <LinearLayout android:id="@+id/fullscreen_content_controls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@color/black_overlay"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/message_edit"
+            android:inputType="textMultiLine|textCapSentences"
+            android:capitalize="sentences"
+            android:hint="@string/chat_hint"
+            android:layout_weight="1.0" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/send"
+            android:id="@+id/send"
+            android:onClick="sendMessage" />
+
+    </LinearLayout>
+
+</LinearLayout>
