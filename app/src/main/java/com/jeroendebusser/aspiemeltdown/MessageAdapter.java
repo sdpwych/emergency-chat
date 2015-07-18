@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Jeroen De Busser on 28/11/2014.
  */
-public class MessageAdapter extends ArrayAdapter<String> {
+public class MessageAdapter extends ArrayAdapter<Message> {
     private Context c;
     public MessageAdapter(Context context) {
         super(context,R.layout.user0_message);
@@ -21,7 +21,7 @@ public class MessageAdapter extends ArrayAdapter<String> {
 
     @Override
     public int getItemViewType(int position) {
-        return (position % 2 == 0) ? R.layout.user0_message : R.layout.user1_message;
+        return (getItem(position).getUser()) ? R.layout.user1_message : R.layout.user0_message;
     }
 
     @Override
@@ -34,13 +34,9 @@ public class MessageAdapter extends ArrayAdapter<String> {
         View v = convertView;
         if (v == null) {
             LayoutInflater vi = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            if(position % 2 == 0) {
-                v = vi.inflate(R.layout.user0_message, null);
-            } else {
-                v = vi.inflate(R.layout.user1_message, null);
-            }
+            v = vi.inflate(getItemViewType(position), null);
         }
-        String s = getItem(position);
+        String s = getItem(position).getMessage();
         if (s != null) {
             TextView t = (TextView) v.findViewById(R.id.message);
             if (t != null) t.setText(s);

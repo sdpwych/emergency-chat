@@ -17,6 +17,11 @@ public class Chat extends Activity {
      */
     private MessageAdapter mMessages;
 
+    /**
+     * The switch determining which user the next message is from
+     */
+    private SwitchHelper userSwitch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +33,8 @@ public class Chat extends Activity {
         mMessages.setNotifyOnChange(true);
         final ListView listView = (ListView) findViewById(R.id.message_view);
         listView.setAdapter(mMessages);
+
+        userSwitch = SwitchHelper.createInstance(this,true);
     }
 
     @Override
@@ -40,6 +47,8 @@ public class Chat extends Activity {
         EditText editText = (EditText) findViewById(R.id.message_edit);
         String message = editText.getText().toString();
         editText.setText("");
-        mMessages.add(message);
+        mMessages.add(new Message(message,userSwitch.checked()));
+        //TODO: check for user preference
+        userSwitch.toggle();
     }
 }

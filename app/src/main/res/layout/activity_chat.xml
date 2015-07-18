@@ -29,6 +29,13 @@
         android:listSelector="@android:color/transparent"
         android:cacheColorHint="@android:color/transparent" />
 
+    <ToggleButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton"
+        android:layout_gravity="center_vertical" />
+
     <LinearLayout android:id="@+id/fullscreen_content_controls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
