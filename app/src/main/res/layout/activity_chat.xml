@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Chat"
     android:id="@+id/fullscreen_content">
@@ -29,12 +30,11 @@
         android:listSelector="@android:color/transparent"
         android:cacheColorHint="@android:color/transparent" />
 
-    <ToggleButton
-        android:layout_width="match_parent"
+    <android.support.v7.widget.SwitchCompat android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New ToggleButton"
-        android:id="@+id/toggleButton"
-        android:layout_gravity="center_vertical" />
+        app:showText="false"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/userSwitch" />
 
     <LinearLayout android:id="@+id/fullscreen_content_controls"
         android:layout_width="match_parent"
@@ -49,7 +49,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/message_edit"
             android:inputType="textMultiLine|textCapSentences"
-            android:capitalize="sentences"
             android:hint="@string/chat_hint"
             android:layout_weight="1.0" />
 

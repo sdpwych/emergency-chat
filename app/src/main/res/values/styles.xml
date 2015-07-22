@@ -2,13 +2,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <!--<style name="AppTheme" parent="android:Theme.DeviceDefault.Light">
-       <!- Customize your theme here.
-    </style>-->
+    <style name="AppTheme"/>
 
-    <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@null</item>
+
+    <style name="FullscreenTheme" parent="Base.Theme.AppCompat.Light">
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+        <!--<item name="android:windowBackground">@color/black_overlay</item>-->
         <item name="metaButtonBarStyle">@style/ButtonBar</item>
         <item name="metaButtonBarButtonStyle">@style/ButtonBarButton</item>
     </style>

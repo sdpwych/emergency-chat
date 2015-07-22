@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Splash screen">
     <EditTextPreference android:key="pref_splash_header"
-        android:title="Splash header"
+        android:title="Header"
         android:defaultValue="@string/meltdown_warning"
         android:inputType="textCapSentences"/>
     <EditTextPreference android:key="pref_splash"
@@ -11,8 +13,16 @@
         android:defaultValue="@string/splash"
         android:inputType="textMultiLine|textCapSentences" />
     <ListPreference android:key="pref_text_size"
-        android:title="Splash text size  "
+        android:title="Text size  "
         android:defaultValue="26"
         android:entries="@array/textSizes"
         android:entryValues="@array/textSizeValues"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Chat">
+        <CheckBoxPreference android:key="pref_switch"
+            android:title="Auto-switch user"
+            android:summary="Switches the user after each message"
+            android:defaultValue="true"/>
+    </PreferenceCategory>
 </PreferenceScreen>

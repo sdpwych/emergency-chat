@@ -1,7 +1,9 @@
 package com.jeroendebusser.aspiemeltdown;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,6 +24,8 @@ public class Chat extends Activity {
      */
     private SwitchHelper userSwitch;
 
+    private boolean autoSwitch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,13 @@ public class Chat extends Activity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        this.autoSwitch = pref.getBoolean(SettingsActivity.KEY_SWITCH,true);
+    }
+
+    @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         //mMessages.addAll("This is a \nmultiline\ntest", "testing");
@@ -49,6 +60,6 @@ public class Chat extends Activity {
         editText.setText("");
         mMessages.add(new Message(message,userSwitch.checked()));
         //TODO: check for user preference
-        userSwitch.toggle();
+        if(this.autoSwitch) userSwitch.toggle();
     }
 }
