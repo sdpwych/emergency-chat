@@ -8,7 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.jeroendebusser.aspiemeltdown.Splash"
-    android:longClickable="true"
     android:id="@+id/splash_layout"
     android:showDividers="none">
 
@@ -21,16 +20,24 @@
         android:textSize="35sp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dip"
-        android:layout_marginTop="10dip" />
+        android:layout_marginTop="10dip"
+        android:longClickable="true" />
 
-    <TextView
-        android:text="@string/splash"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dip"
-        android:id="@+id/splash_message"
-        android:layout_weight="1.0" />
+        android:layout_height="0dp"
+        android:id="@+id/scrollView"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1.0">
+
+        <TextView
+            android:text="@string/splash"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:textSize="28sp"
+            android:layout_marginBottom="10dip"
+            android:id="@+id/splash_message" />
+    </ScrollView>
 
     <Button
         android:layout_width="match_parent"

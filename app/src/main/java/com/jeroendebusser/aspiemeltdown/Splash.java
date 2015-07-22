@@ -19,7 +19,7 @@ public class Splash extends Activity {
         super.onCreate(savedInstanceState);
         PreferenceManager.setDefaultValues(this,R.xml.preferences,false);
         setContentView(R.layout.activity_splash);
-        View next = findViewById(R.id.splash_layout);
+        View next = findViewById(R.id.splash_header);
         next.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

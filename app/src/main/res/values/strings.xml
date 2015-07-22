@@ -15,6 +15,6 @@
     <string name="pref_splash_summ">Text visible on splash screen</string>
     <string name="title_activity_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="toastText">Long press for settings</string>
+    <string name="toastText">Long press title for settings</string>
 
 </resources>
