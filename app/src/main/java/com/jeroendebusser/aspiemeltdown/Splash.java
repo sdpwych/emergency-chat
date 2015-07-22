@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,12 +42,18 @@ public class Splash extends Activity {
     public void onResume() {
         super.onResume();
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        //Set each setting
         String splash = pref.getString(SettingsActivity.KEY_PREF_SPLASH,"");
         TextView text = (TextView) findViewById(R.id.splash_message);
         text.setText(splash);
+
+        int textsize = Integer.parseInt(pref.getString(SettingsActivity.KEY_PREF_SIZE,"26"));
+        text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textsize);
+
         String splash_h = pref.getString(SettingsActivity.KEY_PREF_HEADER,"");
         TextView text_h = (TextView) findViewById(R.id.splash_header);
         text_h.setText(splash_h);
+
         Context context = getApplicationContext();
         CharSequence toastText = getString(R.string.toastText);
         int duration = Toast.LENGTH_SHORT;

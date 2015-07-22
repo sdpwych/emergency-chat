@@ -8,6 +8,7 @@ public class SettingsActivity extends PreferenceActivity {
 
     public static final String KEY_PREF_SPLASH = "pref_splash";
     public static final String KEY_PREF_HEADER = "pref_splash_header";
+    public static final String KEY_PREF_SIZE = "pref_text_size";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

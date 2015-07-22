@@ -10,4 +10,9 @@
         android:summary="@string/pref_splash_summ"
         android:defaultValue="@string/splash"
         android:inputType="textMultiLine|textCapSentences" />
+    <ListPreference android:key="pref_text_size"
+        android:title="Splash text size  "
+        android:defaultValue="26"
+        android:entries="@array/textSizes"
+        android:entryValues="@array/textSizeValues"/>
 </PreferenceScreen>
