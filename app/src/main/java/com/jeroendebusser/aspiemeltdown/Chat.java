@@ -8,15 +8,22 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.jeroendebusser.aspiemeltdown.dao.Dao;
+import com.jeroendebusser.aspiemeltdown.dao.DaoSession;
+import com.jeroendebusser.aspiemeltdown.dao.Message;
+import com.jeroendebusser.aspiemeltdown.dao.MessageDao;
+
 
 /**
  * The main chat activity
  */
 public class Chat extends Activity {
 
+    public static final String EDIT_STRING = "EDIT_STRING";
+    public static final String SWITCH_STATE = "SWITCH_STATE";
     /*
-     * The arrayadapter for our messages
-     */
+             * The arrayadapter for our messages
+             */
     private MessageAdapter mMessages;
 
     /**
@@ -26,9 +33,13 @@ public class Chat extends Activity {
 
     private boolean autoSwitch;
 
+    private MessageDao session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        session = Dao.getSession(this).getMessageDao();
 
         setContentView(R.layout.activity_chat);
 
@@ -38,7 +49,15 @@ public class Chat extends Activity {
         final ListView listView = (ListView) findViewById(R.id.message_view);
         listView.setAdapter(mMessages);
 
-        userSwitch = SwitchHelper.createInstance(this,true);
+        if(savedInstanceState != null) {
+            mMessages.addAll(session.loadAll());
+            getEditText().setText(savedInstanceState.getString(EDIT_STRING));
+            userSwitch = SwitchHelper.createInstance(this,savedInstanceState.getBoolean(SWITCH_STATE));
+        } else {
+            //Clear previous session
+            session.deleteAll();
+            userSwitch = SwitchHelper.createInstance(this,true);
+        }
     }
 
     @Override
@@ -54,12 +73,23 @@ public class Chat extends Activity {
         //mMessages.addAll("This is a \nmultiline\ntest", "testing");
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString(EDIT_STRING,getEditText().getText().toString());
+        outState.putBoolean(SWITCH_STATE,userSwitch.checked());
+
+        super.onSaveInstanceState(outState);
+    }
+
+    private EditText getEditText() {
+        return (EditText) findViewById(R.id.message_edit);
+    }
+
     public void sendMessage(View view) {
-        EditText editText = (EditText) findViewById(R.id.message_edit);
+        EditText editText = getEditText();
         String message = editText.getText().toString();
         editText.setText("");
         mMessages.add(new Message(message,userSwitch.checked()));
-        //TODO: check for user preference
         if(this.autoSwitch) userSwitch.toggle();
     }
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.jeroendebusser.aspiemeltdown.dao.Message;
 
 /**
  * Created by Jeroen De Busser on 28/11/2014.
