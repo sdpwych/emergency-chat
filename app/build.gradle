@@ -14,14 +14,14 @@ buildscript {
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "20.0.0"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "com.jeroendebusser.aspiemeltdown"
         minSdkVersion 7
         targetSdkVersion 22
-        versionCode 5
-        versionName "1.2"
+        versionCode 6
+        versionName "2.0"
     }
     buildTypes {
         release {
