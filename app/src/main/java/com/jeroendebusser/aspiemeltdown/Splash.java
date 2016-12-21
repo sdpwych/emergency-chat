@@ -20,14 +20,6 @@ public class Splash extends Activity {
         super.onCreate(savedInstanceState);
         PreferenceManager.setDefaultValues(this,R.xml.preferences,false);
         setContentView(R.layout.activity_splash);
-        View next = findViewById(R.id.splash_header);
-        next.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                openSettings();
-                return true;
-            }
-        });
     }
 
 
@@ -53,13 +45,6 @@ public class Splash extends Activity {
         String splash_h = pref.getString(SettingsActivity.KEY_PREF_HEADER,"");
         TextView text_h = (TextView) findViewById(R.id.splash_header);
         text_h.setText(splash_h);
-
-        Context context = getApplicationContext();
-        CharSequence toastText = getString(R.string.toastText);
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, toastText, duration);
-        toast.show();
     }
 
     @Override
@@ -69,7 +54,7 @@ public class Splash extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            openSettings();
+            openSettings(null);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -80,7 +65,7 @@ public class Splash extends Activity {
         startActivity(next);
     }
 
-    private void openSettings() {
+    public void openSettings(View view) {
         Intent next = new Intent().setClass(Splash.this, SettingsActivity.class);
         startActivity(next);
     }
