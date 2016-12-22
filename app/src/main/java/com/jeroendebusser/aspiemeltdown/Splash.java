@@ -18,7 +18,6 @@ public class Splash extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PreferenceManager.setDefaultValues(this,R.xml.preferences,false);
         setContentView(R.layout.activity_splash);
     }
 
