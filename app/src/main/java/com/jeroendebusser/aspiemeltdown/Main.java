@@ -51,6 +51,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener {
             dao.insert(screen);
             dao.insert(new SplashScreen(null,"foo","testing"));
             screens = dao.loadAll();
+            openSplash(0);
         }
 
         setContentView(R.layout.activity_main);
@@ -79,9 +80,13 @@ public class Main extends Activity implements AdapterView.OnItemClickListener {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent next = new Intent().setClass(Main.this,Splash.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        next.putExtra(Splash.SPLASH_ID,screens.get(position).getId());
+        openSplash(position);
+    }
 
+    private void openSplash(int id) {
+        Intent next = new Intent().setClass(Main.this,Splash.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        next.putExtra(Splash.SPLASH_ID,screens.get(id).getId());
+        next.putExtra(Splash.SETTINGS_SHOW,screens.size() == 1);
         startActivity(next);
     }
 

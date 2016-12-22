@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.jeroendebusser.aspiemeltdown.dao.SplashScreenDao;
 public class Splash extends Activity {
 
     public static final String SPLASH_ID = "SPLASH_ID";
+    public static final String SETTINGS_SHOW = "SETTINGS_SHOW";
 
     SplashScreen screen;
 
@@ -29,14 +31,11 @@ public class Splash extends Activity {
         setContentView(R.layout.activity_splash);
         long key = this.getIntent().getLongExtra(SPLASH_ID,0);
         screen = Dao.getSession(this).getSplashScreenDao().load(key);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.splash, menu);
-        return true;
+        boolean show_settings = this.getIntent().getBooleanExtra(SETTINGS_SHOW,true);
+        if(!show_settings) {
+            View settings_button = findViewById(R.id.settingsButton);
+            ((ViewGroup)settings_button.getParent()).removeView(settings_button);
+        }
     }
 
     @Override
@@ -52,19 +51,6 @@ public class Splash extends Activity {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         int textsize = Integer.parseInt(pref.getString(SettingsActivity.KEY_PREF_SIZE,"26"));
         text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textsize);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            openSettings(null);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void Continue(View view) {
