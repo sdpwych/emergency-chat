@@ -42,4 +42,6 @@ public class SplashScreen {
     public void setText(String text) {
         this.text = text;
     }
+
+    public String toString() { return this.title + this.text; }
 }
