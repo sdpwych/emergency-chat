@@ -13,12 +13,22 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jeroendebusser.aspiemeltdown.dao.Dao;
+import com.jeroendebusser.aspiemeltdown.dao.SplashScreen;
+import com.jeroendebusser.aspiemeltdown.dao.SplashScreenDao;
+
 public class Splash extends Activity {
+
+    public static final String SPLASH_ID = "SPLASH_ID";
+
+    SplashScreen screen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        long key = this.getIntent().getLongExtra(SPLASH_ID,0);
+        screen = Dao.getSession(this).getSplashScreenDao().load(key);
     }
 
 
@@ -32,18 +42,16 @@ public class Splash extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        //Set each setting
-        String splash = pref.getString(SettingsActivity.KEY_PREF_SPLASH,"");
-        TextView text = (TextView) findViewById(R.id.splash_message);
-        text.setText(splash);
 
+        TextView text_h = (TextView) findViewById(R.id.splash_header);
+        text_h.setText(screen.getTitle());
+
+        TextView text = (TextView) findViewById(R.id.splash_message);
+        text.setText(screen.getText());
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         int textsize = Integer.parseInt(pref.getString(SettingsActivity.KEY_PREF_SIZE,"26"));
         text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textsize);
-
-        String splash_h = pref.getString(SettingsActivity.KEY_PREF_HEADER,"");
-        TextView text_h = (TextView) findViewById(R.id.splash_header);
-        text_h.setText(splash_h);
     }
 
     @Override
