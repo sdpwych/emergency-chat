@@ -46,6 +46,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jeroendebusser.aspiemeltdown.SettingsChooserActivity" />
         </activity>
+        <activity
+            android:name=".SplashEditActivity"
+            android:label="Edit"
+            android:parentActivityName=".SettingsChooserActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jeroendebusser.aspiemeltdown.SettingsChooserActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -56,25 +56,8 @@ public class Main extends Activity implements AdapterView.OnItemClickListener {
 
         setContentView(R.layout.activity_main);
         ListView listView = (ListView) findViewById(R.id.screens);
-        ArrayAdapter adapter = new ArrayAdapter<SplashScreen>(this, android.R.layout.simple_list_item_2, android.R.id.text1, screens) {
-            @NonNull
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-                text1.setText(this.getItem(position).getTitle());
-                String splash = this.getItem(position).getText();
-                int max_length = 40;
-                if(splash.length() > max_length) {
-                    splash = splash.substring(0,max_length) + "...";
-                }
-                text2.setText(splash);
 
-                return view;
-            }
-        };
-        listView.setAdapter(adapter);
+        listView.setAdapter(new SplashScreenAdapter(this,screens));
         listView.setOnItemClickListener(this);
     }
 
