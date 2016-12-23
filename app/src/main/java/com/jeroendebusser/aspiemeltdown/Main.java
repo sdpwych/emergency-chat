@@ -91,7 +91,7 @@ public class Main extends Activity implements AdapterView.OnItemClickListener {
     }
 
     public void openSettings(View view) {
-        Intent next = new Intent().setClass(Main.this, SettingsActivity.class);
+        Intent next = new Intent().setClass(Main.this, SettingsChooserActivity.class);
         startActivity(next);
     }
 }

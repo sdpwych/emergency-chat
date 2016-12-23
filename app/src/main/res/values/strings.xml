@@ -15,5 +15,8 @@
     <string name="pref_splash_summ">Text visible on splash screen</string>
     <string name="title_activity_settings">Settings</string>
     <string name="settings">Settings</string>
-
+    <string-array name="settingsNames">
+        <item>Splash screens</item>
+        <item>Miscellaneous settings</item>
+    </string-array>
 </resources>

@@ -59,7 +59,7 @@ public class Splash extends Activity {
     }
 
     public void openSettings(View view) {
-        Intent next = new Intent().setClass(Splash.this, SettingsActivity.class);
+        Intent next = new Intent().setClass(Splash.this, SettingsChooserActivity.class);
         startActivity(next);
     }
 }

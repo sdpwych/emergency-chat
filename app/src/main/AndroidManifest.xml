@@ -31,12 +31,20 @@
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".Splash" >
+            android:name=".SettingsChooserActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".Main">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jeroendebusser.aspiemeltdown.Splash" />
+                android:value="com.jeroendebusser.aspiemeltdown.Main" />
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".SettingsChooserActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jeroendebusser.aspiemeltdown.SettingsChooserActivity" />
         </activity>
     </application>
 
