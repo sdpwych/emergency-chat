@@ -27,14 +27,24 @@ public class Main extends Activity implements AdapterView.OnItemClickListener {
 
     SplashScreenDao dao;
 
-    List<SplashScreen> screens;
+    SplashScreenAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PreferenceManager.setDefaultValues(this,R.xml.preferences,false);
         dao = Dao.getSession(this).getSplashScreenDao();
-        screens = dao.loadAll();
+
+        setContentView(R.layout.activity_main);
+        ListView listView = (ListView) findViewById(R.id.screens);
+
+        adapter = new SplashScreenAdapter(this,getScreens());
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
+    }
+
+    private List<SplashScreen> getScreens() {
+        List<SplashScreen> screens = dao.loadAll();
         if(screens.size() == 0) {
             //Insert default splash screen
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -49,16 +59,21 @@ public class Main extends Activity implements AdapterView.OnItemClickListener {
             }
             SplashScreen screen = new SplashScreen(null,title,splash);
             dao.insert(screen);
-            dao.insert(new SplashScreen(null,"foo","testing"));
-            screens = dao.loadAll();
+        }
+        return dao.loadAll();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<SplashScreen> screens = getScreens();
+        adapter.clear();
+        adapter.addAll(screens);
+        adapter.notifyDataSetChanged();
+
+        if(adapter.getCount() == 1) {
             openSplash(0);
         }
-
-        setContentView(R.layout.activity_main);
-        ListView listView = (ListView) findViewById(R.id.screens);
-
-        listView.setAdapter(new SplashScreenAdapter(this,screens));
-        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -67,9 +82,14 @@ public class Main extends Activity implements AdapterView.OnItemClickListener {
     }
 
     private void openSplash(int id) {
-        Intent next = new Intent().setClass(Main.this,Splash.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        next.putExtra(Splash.SPLASH_ID,screens.get(id).getId());
-        next.putExtra(Splash.SETTINGS_SHOW,screens.size() == 1);
+        Intent next = new Intent().setClass(Main.this,Splash.class);
+        boolean single_splash = adapter.getCount() == 1;
+        if(single_splash) {
+            next.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        }
+        SplashScreen screen = adapter.getItem(id);
+        next.putExtra(Splash.SPLASH_ID,screen.getId());
+        next.putExtra(Splash.SETTINGS_SHOW,single_splash);
         startActivity(next);
     }
 

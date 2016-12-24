@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.jeroendebusser.aspiemeltdown.dao.SplashScreen;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -36,5 +37,12 @@ public class SplashScreenAdapter extends ArrayAdapter<SplashScreen> {
         text2.setText(splash);
 
         return view;
+    }
+
+    @Override
+    public void addAll(Collection<? extends SplashScreen> c) {
+        for(SplashScreen s : c) {
+            add(s);
+        }
     }
 }
